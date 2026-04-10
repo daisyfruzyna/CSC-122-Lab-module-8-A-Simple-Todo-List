@@ -76,7 +76,7 @@ string TodoList::incomplete() {
 }
 
 string TodoList::all() {
-  cout << "All:" << endl;
+  cout << "All: " << endl;
   cout << "  ";
   string ret = "All: \n  ";
   ret += incomplete();

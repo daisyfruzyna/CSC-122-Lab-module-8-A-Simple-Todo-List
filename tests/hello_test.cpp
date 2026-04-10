@@ -17,7 +17,23 @@ TEST_CASE( "add" ) {
     list.add("a");
     REQUIRE( list.incomplete() == "Incomplete: a\n" );
 }
+TEST_CASE( "complete" ) {
+    TodoList list;
+    list.add("a");
+    list.complete("a");
+    REQUIRE( list.incomplete() == "Incomplete: \n" );
+    REQUIRE( list.complete() == "Complete: a\n" );
+}
+TEST_CASE( "clear" ) {
+    TodoList list;
 
+    list.add("a");
+    list.add("1");
+    list.complete("1");
+    REQUIRE( list.all() == "All: \n  Incomplete: a\n  Complete: 1\n" );
+    list.clear();
+    REQUIRE( list.all() == "All: \n  Incomplete: \n  Complete: \n" );
+}
 
 
 TEST_CASE(" \"and\" and \",\" " ) {
@@ -37,6 +53,25 @@ TEST_CASE(" \"and\" and \",\" " ) {
     list.add("3");
     list.complete("3");
     REQUIRE( list.complete() == "Complete: 1, 2, and 3\n" );
-    REQUIRE( list.all() == "All:\n  Incomplete: a, b, and c\n  Complete: 1, 2, and 3\n" );
+    REQUIRE( list.all() == "All: \n  Incomplete: a, b, and c\n  Complete: 1, 2, and 3\n" );
+}
 
+TEST_CASE( "blank input" ) {
+    TodoList list;
+    list.add("");
+    list.add("");
+    REQUIRE( list.incomplete() == "Incomplete: \n" );
+}
+TEST_CASE( "duplicates" ) {
+    TodoList list;
+    list.add("a");
+    REQUIRE( list.incomplete() == "Incomplete: a\n" );
+    list.add("a");
+    REQUIRE( list.incomplete() == "Incomplete: a\n" );
+
+    list.complete("a");
+    list.add("a");
+    REQUIRE( list.all() == "All: \n  Incomplete: a\n  Complete: a\n" );
+    list.complete("a");
+    REQUIRE( list.complete() == "Complete: a and a\n" );
 }
