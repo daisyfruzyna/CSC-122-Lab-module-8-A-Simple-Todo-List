@@ -17,9 +17,9 @@ class TodoList {
   TodoList();
   void add(const string& item);
   void complete(const string& item);
-  void all();
-  void complete();
-  void incomplete();
+  string all();
+  string complete();
+  string incomplete();
   void clear();
 
 };
