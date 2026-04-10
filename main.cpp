@@ -82,8 +82,11 @@ void test() {
   TodoList list;
   list.add("");
   list.add("Buy milk");
+  list.incomplete(); // for checking proper "and" and "," use
   list.add("Buy chalk");
+  list.incomplete(); // for proper "and" and "," use
   list.add("Buy eggs");
+  list.incomplete(); // for proper "and" and "," use
   list.add("Prepare a lesson for CSC 122");
   list.add("Sow beet seeds");
 
@@ -99,6 +102,11 @@ void test() {
   // Pretty prints the tasks "Buy milk",
   // "Prepare a lesson for CSC 122", and "Sow beet seeds"
   list.incomplete();
+  cout << "legal duplicate attempt" << endl;
+  list.add("Buy eggs");
+  cout << "illegal duplicate attempt" << endl;
+  list.add("Buy milk");
+  list.all();
 
   // Clears the to-do list
   list.clear();
