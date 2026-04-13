@@ -14,11 +14,15 @@ TEST_CASE("it returns Hello World") {
 
 TEST_CASE( "add" ) {
     TodoList list;
+    REQUIRE( list.incomplete() == "Incomplete: \n" );
     list.add("a");
     REQUIRE( list.incomplete() == "Incomplete: a\n" );
 }
 TEST_CASE( "complete" ) {
     TodoList list;
+    REQUIRE( list.complete() == "Complete: \n" );
+    list.complete("a");
+    REQUIRE( list.complete() == "Complete: \n" );
     list.add("a");
     list.complete("a");
     REQUIRE( list.incomplete() == "Incomplete: \n" );
@@ -26,11 +30,12 @@ TEST_CASE( "complete" ) {
 }
 TEST_CASE( "clear" ) {
     TodoList list;
-
     list.add("a");
     list.add("1");
     list.complete("1");
     REQUIRE( list.all() == "All: \n  Incomplete: a\n  Complete: 1\n" );
+    list.clear();
+    REQUIRE( list.all() == "All: \n  Incomplete: \n  Complete: \n" );
     list.clear();
     REQUIRE( list.all() == "All: \n  Incomplete: \n  Complete: \n" );
 }
